@@ -14,7 +14,12 @@ More than twice as fast than a pure Python function (timed with %timeit in Jupyt
 
 __How to use__:
 
-* copy _sdcoeff.so_ into the folder where you're running Python.
+Copy file: 
+
+* _sdcoeff.so_ (Linux) or
+* _sdcoeff.pyd_ (Windows) 
+
+into the folder where you're running Python.
 
 ```python
 from sdcoeff import coefficient
@@ -29,5 +34,5 @@ _Note: in case of both words being shorter than two characters, e.g. "I" and "a"
 
 
 TO DO: 
-* Currently only compiled for Linux (_sdcoeff.so_ file) - compile for other systems if possible.
 * Catch 1-letter words in the function itself and return an error message.
+* Currently only compiled for Linux and Windows 10 - compile for MacOS if possible.
