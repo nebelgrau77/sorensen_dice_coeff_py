@@ -5,9 +5,10 @@ Calculates the Sørensen–Dice coefficient between two strings:
 https://en.wikipedia.org/wiki/Sørensen–Dice_coefficient
 
 
-Turned into a Python module with PyO3 crate (original Rust program here: https://github.com/nebelgrau77/sorensen_dice_coeff)
 
-Currently only compiled for Linux (_sdcoeff.so_ file).
+Turned into a Python module with PyO3 crate (original Rust program here: https://github.com/nebelgrau77/sorensen_dice_coeff).
+
+More than twice as fast than a pure Python function (timed with %timeit in JupyterLab).
 
 
 
@@ -25,3 +26,8 @@ c = coefficient('Philadelphia', 'Philladelphia')
 ```
 
 _Note: in case of both words being shorter than two characters, e.g. "I" and "a", function will return a 'nan' value._
+
+
+TO DO: 
+* Currently only compiled for Linux (_sdcoeff.so_ file) - compile for other systems if possible.
+* Catch 1-letter words in the function itself and return an error message.
