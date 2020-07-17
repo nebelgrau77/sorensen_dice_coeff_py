@@ -30,9 +30,8 @@ c = coefficient('Philadelphia', 'Philladelphia')
 
 ```
 
-_Note: in case of both words being shorter than two characters, e.g. "I" and "a", function will return a 'nan' value._
+_Note: if any of the words is shorter than two characters, i.e. doesn't have a single bigram, function will return 0._
 
 
 TO DO: 
-* Catch 1-letter words in the function itself and return an error message.
 * Currently only compiled for Linux and Windows 10 - compile for MacOS if possible.
