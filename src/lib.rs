@@ -5,10 +5,9 @@ use std::borrow::Cow;
 
 #[pymodule]
 fn sdcoeff(py: Python, m: &PyModule) -> PyResult<()> {
-    // #[pyfn] annotation automatically converts the arguments from Python objects
-    // to Rust values, and the Rust return value into a Python object
-    // the _py argument represents that we're holding the GIL
-    #[pyfn(m, "coefficient")]
+
+    #[pyfn(m, "coefficient")] // name of the Python function in module sdcoeff
+
     fn sd_coeff_py(_py: Python, word_a: &str, word_b: &str) -> PyResult<f32> {
         let result = sd_coeff(&word_a, &word_b);
         Ok(result)
@@ -17,18 +16,30 @@ fn sdcoeff(py: Python, m: &PyModule) -> PyResult<()> {
     Ok(())
 }
 
-// logic implemented as a normal Rust function
+// logic implemented in Rust
 
 fn sd_coeff(word_a: &str, word_b: &str) -> f32 {
     
     // calculate Sørensen–Dice coefficient
 
-    let bigrams_a = get_bigrams(word_a);
-    let bigrams_b = get_bigrams(word_b);
+    let mut coeff = 0.0_f32;
+
+    if (word_a.len() < 2 ) | (word_b.len() < 2  ) { // return zero if any of the words doesn't have at least one bigram
+
+        coeff = 0.0;
+        
+    }
+
+    else {
+
+        let bigrams_a = get_bigrams(word_a);
+        let bigrams_b = get_bigrams(word_b);
     
-    let common = compare_bigrams(&bigrams_a, &bigrams_b);
-    
-    let coeff: f32 = (2.0 * common as f32) / (bigrams_a.len() + bigrams_b.len()) as f32;
+        let common = compare_bigrams(&bigrams_a, &bigrams_b);
+
+        coeff = (2.0 * common as f32) / (bigrams_a.len() + bigrams_b.len()) as f32;
+
+    }
     
     return coeff;
     
